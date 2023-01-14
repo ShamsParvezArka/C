@@ -32,14 +32,19 @@ int64_t vmin_non_zero(int64_t vector2[], int64_t n) {
 	}
 	return vmin_non_zero;
 }
-
 int16_t *parse_vector2(int64_t n) {
-	int16_t *vector2 = malloc(sizeof(int16_t));
+	int16_t *vector2 = (int16_t*) malloc(sizeof(int16_t));
 	int16_t length = (int16_t) floor(log10(n));
 	for (int i = 0; i < length; i++) {
 		vector2[length - i] = n % 2;
 		n = n / 10;
 	}
 	return vector2;
+}
+int64_t max(int64_t a, int64_t b) {
+	return (a > b)?a : b;
+}
+int64_t min(int64_t a, int64_t b) {
+	return (a > b)?a : b;
 }
 
