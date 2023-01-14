@@ -33,7 +33,7 @@ int64_t vmin_non_zero(int64_t vector2[], int64_t n) {
 	return vmin_non_zero;
 }
 int16_t *parse_vector2(int64_t n) {
-	int16_t *vector2 = (int16_t*) malloc(sizeof(int16_t));
+	int16_t *vector2 = (int16_t*) malloc(SHRT_MAX * sizeof(int16_t));
 	int16_t length = (int16_t) floor(log10(n));
 	for (int i = 0; i < length; i++) {
 		vector2[length - i] = n % 2;
