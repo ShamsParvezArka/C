@@ -5,21 +5,41 @@
 #include <limits.h>
 #include <math.h>
 
-int min(int n, int array[]) {
-	int minimum = INT_MAX;
-	for (int i = 0; i < n; i++) {
-		if (minimum > array[i]) {
-			minimum = array[i];
+int32_t vmax(int32_t vector2[], int32_t n) {
+	int32_t vmax = INT_MIN;
+	for (int32_t i = 0; i < n; i++) {
+		if (vmax < vector2[i]) {
+			vmax = vector2[i];
 		}
 	}
-	return minimum;
+	return vmax;
 }
-int min_non_zero(int n, int array[]) {
-	int minimum_non_zero = INT_MAX;
-	for (int i = 0; i < n; i++) {
-		if (minimum_non_zero > array[i] && array[i] > 0) {
-			minimum_non_zero = array[i];
+int32_t vmin(int32_t vector2[], int32_t n) {
+	int32_t vmin = INT_MAX;
+	for (int32_t i = 0; i < n; i++) {
+		if (vmin > vector2[i]) {
+			vmin = vector2[i];
 		}
 	}
-	return minimum_non_zero;
+	return vmin;
 }
+int32_t vmin_non_zero(int32_t vector2[], int32_t n) {
+	int32_t vmin_non_zero = INT_MAX;
+	for (int32_t i = 0; i < n; i++) {
+		if (vmin_non_zero > vector2[i] && vector2[i] > 0) {
+			vmin_non_zero = vector2[i];
+		}
+	}
+	return vmin_non_zero;
+}
+
+int8_t *parse_vector2(int32_t n) {
+	int8_t *vector2 = malloc(sizeof(int8_t));
+	int8_t length = (int8_t) floor(log10(n));
+	for (int i = 0; i < length; i++) {
+		vector2[length - i] = n % 2;
+		n = n / 10;
+	}
+	return vector2;
+}
+
