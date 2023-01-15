@@ -6,7 +6,22 @@ typedef struct Node {
 	struct Node *link;
 } node;
 
-node *head;
+node *head, *tmp, *new_node;
+
+void push(int data) {
+	new_node = (node*) malloc(sizeof(node));
+	new_node->data = data;
+	new_node->link = head;
+	head = new_node;
+}
+
+int pop(void) {
+	tmp = head;
+	head = head->link;
+	int x = tmp->data;
+	free(tmp);
+	return x;
+}
 
 int main() {
 	node *first  = (node*) malloc(sizeof(node));
@@ -21,6 +36,9 @@ int main() {
 	third->link = NULL;
 
 	head = first;
+	push(100);
+	pop();
+
 	while (head != NULL) {
 		printf("%d ", head->data);
 		head = head->link;
