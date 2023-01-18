@@ -2,7 +2,6 @@
 
 #define maxN 10
 
-
 void selection(int arr[], int N) {
 	int min, tmp;
 	for (int i = 0; i < N; i++) {
