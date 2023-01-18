@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -ggdb
-FILE = insertion_sort
+FILE = bubble_sort.c
 
-output: $(FILE).c
-	$(CC) -o a.out $(FILE).c $(CFLAGS)
+output: $(FILE)
+	$(CC) -o a.out $(FILE) $(CFLAGS)
