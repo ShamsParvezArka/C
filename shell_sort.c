@@ -3,15 +3,15 @@
 #define maxN 10
 
 void shell_sort(int *arr, int N) {
-	int gap, tmp;
+	int gap, key;
 	for (gap = N/2; gap > 0; gap /= 2) {
 		for (int i = gap; i < N; i += 1) {
-			tmp = arr[i];
+			key = arr[i];
 			int j;
-			for (j = i; j >= gap && arr[j-gap] > tmp; j -= gap) {
-				arr[j] = arr[j -gap];
+			for (j = i; j >= gap && arr[j-gap] > key; j -= gap) {
+				arr[j] = arr[j-gap];
 			}
-			arr[j] = tmp;
+			arr[j] = key;
 		}
 	}
 }
