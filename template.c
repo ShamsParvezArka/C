@@ -10,7 +10,9 @@ int  max_element(int *arr, int N);
 int  min_element(int *arr, int N);
 int  arr_to_num(int *arr, int N);
 void num_to_arr(int n, int *arr, int N);
-void shell_sort(int *arr, int N);
+int partition(int *arr, int left, int right);
+void swap(int *a, int *b);
+void quicksort(int *arr, int left, int right);
 
 int main(void) {
   return 0;
@@ -51,16 +53,29 @@ int arr_to_num(int *arr, int N) {
   return number;
 }
 
-void shell_sort(int *arr, int N) {
-	int key;
-	for (int gap = N/2; gap > 0; gap /= 2) {
-		for (int i = gap; i < N; i++) {
-			key = arr[i];
-			int j;
-			for (j = i; j >= gap && arr[j-gap] > key; j -= gap) {
-				arr[j] = arr[j-gap];
-			}
-			arr[j] = key;
-		}
-	}
+void swap(int *x, int *y) {
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+int partition(int *arr, int left, int right) {
+    int pivot = arr[right];
+    int i = left - 1;
+    for (int j = left; j <= right; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[i+1], &arr[right]);
+    return i+1;
+}
+
+void quicksort(int *arr, int left, int right) {
+    if (right > left) {
+        int i = partition(arr, left, right);
+        quicksort(arr, left, i-1);
+        quicksort(arr, i-1, right);
+    }
 }
