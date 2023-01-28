@@ -1,50 +1,66 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
 #include <limits.h>
 #include <math.h>
 
-int64_t vmax(int64_t vector2[], int64_t n) {
-	int64_t vmax = INT_MIN;
-	for (int64_t i = 0; i < n; i++) {
-		if (vmax < vector2[i]) {
-			vmax = vector2[i];
-		}
-	}
-	return vmax;
-}
-int64_t vmin(int64_t vector2[], int64_t n) {
-	int64_t vmin = INT_MAX;
-	for (int64_t i = 0; i < n; i++) {
-		if (vmin > vector2[i]) {
-			vmin = vector2[i];
-		}
-	}
-	return vmin;
-}
-int64_t vmin_non_zero(int64_t vector2[], int64_t n) {
-	int64_t vmin_non_zero = INT_MAX;
-	for (int64_t i = 0; i < n; i++) {
-		if (vmin_non_zero > vector2[i] && vector2[i] > 0) {
-			vmin_non_zero = vector2[i];
-		}
-	}
-	return vmin_non_zero;
-}
-int16_t *parse_vector2(int64_t n) {
-	int16_t *vector2 = (int16_t*) malloc(SHRT_MAX * sizeof(int16_t));
-	int16_t length = (int16_t) floor(log10(n));
-	for (int i = 0; i < length; i++) {
-		vector2[length - i] = n % 2;
-		n = n / 10;
-	}
-	return vector2;
-}
-int64_t max(int64_t a, int64_t b) {
-	return (a > b)?a : b;
-}
-int64_t min(int64_t a, int64_t b) {
-	return (a > b)?a : b;
+#define maxN 10
+
+int  max_element(int *arr, int N);
+int  min_element(int *arr, int N);
+int  arr_to_num(int *arr, int N);
+void num_to_arr(int n, int *arr, int N);
+void shell_sort(int *arr, int N);
+
+int main(void) {
+  return 0;
 }
 
+int max_element(int *arr, int N) {
+  int max = INT_MIN;
+  for (int i = 0; i < N; i++) {
+    if (arr[i] > max) {
+      max = arr[i];
+    }
+  }
+  return max;
+}
+
+int min_element(int *arr, int N) {
+  int min = INT_MAX;
+  for (int i = 0; i < N; i++) {
+    if (arr[i] < min) {
+      min = arr[i];
+    }
+  }
+  return min;
+}
+
+void num_to_arr(int n, int *arr, int N) {
+  for (int i = N-1; i >= 0; i--) {
+    arr[i] = n % 10;
+    n = n / 10;
+  }
+}
+
+int arr_to_num(int *arr, int N) {
+  int number = 0;
+  for (int i = 0; i < N; i++) {
+    number = number*10 + arr[i];
+  }
+  return number;
+}
+
+void shell_sort(int *arr, int N) {
+	int key;
+	for (int gap = N/2; gap > 0; gap /= 2) {
+		for (int i = gap; i < N; i++) {
+			key = arr[i];
+			int j;
+			for (j = i; j >= gap && arr[j-gap] > key; j -= gap) {
+				arr[j] = arr[j-gap];
+			}
+			arr[j] = key;
+		}
+	}
+}
